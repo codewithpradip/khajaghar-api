@@ -48,7 +48,7 @@ class UserLogin(APIView):
                     status=status.HTTP_200_OK)
             else:
                 return Response({
-                    'error':{'non_field_error':['Email and Password is not valid']}},
+                    'error':{'non_field_error':['Email and Password is not valid!!!!!!']}},
                     status=status.HTTP_401_UNAUTHORIZED)
 
 class UserProfile(APIView):

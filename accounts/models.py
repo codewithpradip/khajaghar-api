@@ -8,9 +8,8 @@ class UserManager(BaseUserManager):
     Custom manager for creating and managing user accounts.
     """
     def create_user(self, name, username, email, password=None):
-        """
-        Creates and returns a regular user with the given details.
-        """
+        
+        # Creates and returns a regular user with the given details.
         if not email:
             raise ValueError('User must have an email address')
 
@@ -28,9 +27,9 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, name, username, email, password=None):
-        """
-        Creates and returns a regular user with the given details.
-        """
+        
+        # Creates and returns a regular user with the given details.
+        
         user = self.create_user(
             email=self.normalize_email(email),
             username=username,
@@ -85,9 +84,3 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    def get_role(self):
-        if self.role == 1:
-            user_role = 'Vendor'
-        elif self.role == 2:
-            user_role = 'Customer'
-        return user_role
