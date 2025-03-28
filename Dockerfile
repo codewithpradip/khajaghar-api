@@ -11,14 +11,17 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /code
 
-# Install dependencies
+#  Copy requirements
 COPY ./requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+
+# Install dependencies
+RUN python -m venv /py && \
+    pip install --upgrade pip && \
+    apk add --update --upgrade --no-cache postgresql-client && \
+    apk add --update --upgrade --no-cache --virtual .tmp \
+        build-base postgresql-dev
+
+RUN pip install -r /requirements.txt && apk del .tmp
 
 # Copy project
 COPY ./code /code
-
-# EXPOSE 8000
-
-# CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
